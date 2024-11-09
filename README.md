@@ -1,4 +1,14 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# :computer: Smalag
+
+## Description
+
+This is a prototype of a software created by developers, for developers, with a focus on providing a comprehensive project management tool.
+
+## Tech-stack
+
+### :art: Design: [﻿Figma]()
+
+### :technologist: Frontend: [NextJS](https://github.com/vercel/next.js), [TailwindCSS](https://github.com/tailwindlabs/tailwindcss), [TypeScript](https://github.com/microsoft/TypeScript), [Playwright](https://github.com/microsoft/playwright), [Shadcn](https://github.com/shadcn-ui/ui)
 
 ## Getting Started
 
