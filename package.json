@@ -7,11 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write .",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky",
     "docker:build": "docker-compose build",
     "docker:down": "docker-compose down",
-    "docker:up": "docker-compose up --watch"
+    "docker:up": "docker-compose up --watch",
+    "test:e2e:show": "playwright show-report",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.0",
@@ -30,6 +32,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
+    "@playwright/test": "^1.48.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
