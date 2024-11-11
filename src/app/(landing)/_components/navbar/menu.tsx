@@ -29,7 +29,7 @@ const Menu = ({ orientation }: MenuProps) => {
                     ? "bg-[#09090B] border-[#27272A]"
                     : "",
                 )}
-                key={menuItem.id}
+                key={`desktop-${menuItem.id}`}
               >
                 {section === menuItem.path && menuItem.icon}
                 {menuItem.label}
@@ -54,7 +54,7 @@ const Menu = ({ orientation }: MenuProps) => {
                   ? "bg-themeGray border-[#27272A]"
                   : "",
               )}
-              key={menuItem.id}
+              key={`mobile-${menuItem.id}`}
             >
               {menuItem.icon}
               {menuItem.label}

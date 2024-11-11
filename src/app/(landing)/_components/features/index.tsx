@@ -6,6 +6,14 @@ import { Check } from "@/icons";
 import Link from "next/link";
 
 export const FeatureSection = () => {
+  const features = [
+    "Feature number 1",
+    "Feature number 2",
+    "Feature number 3",
+    "Feature number 4",
+    "Feature number 5",
+  ];
+
   return (
     <div
       className="w-full pt-20 flex flex-col items-center gap-3"
@@ -42,26 +50,12 @@ export const FeatureSection = () => {
         </div>
         <div className="flex flex-col gap-2 text-[#B4B0AE] mt-5">
           <p>Features</p>
-          <span className="flex gap-2 mt-3 items-center">
-            <Check />
-            Feature number 1
-          </span>
-          <span className="flex gap-2 items-center">
-            <Check />
-            Feature number 1
-          </span>
-          <span className="flex gap-2 items-center">
-            <Check />
-            Feature number 1
-          </span>
-          <span className="flex gap-2 items-center">
-            <Check />
-            Feature number 1
-          </span>
-          <span className="flex gap-2 items-center">
-            <Check />
-            Feature number 1
-          </span>
+          {features.map((feature) => (
+            <span className="flex gap-2 mt-3 items-center" key={feature}>
+              <Check />
+              {feature}
+            </span>
+          ))}
         </div>
       </Card>
     </div>
