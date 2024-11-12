@@ -11,7 +11,7 @@ const LandingPageNavbar = () => {
       <p className="font-bold text-2xl">Smålag.</p>
       <Menu orientation="desktop" />
       <div className="flex gap-2">
-        <Link href="/sign-in">
+        <Link href="/register">
           <Button
             variant="outline"
             className="bg-themeBlack rounded-2xl flex gap-2 border-themeGray hover:bg-themeGray"
