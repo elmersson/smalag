@@ -12,3 +12,10 @@ test("get started link", async ({ page }) => {
   const smålagElements = await page.locator("text=Smålag").count();
   await expect(smålagElements).toBe(3);
 });
+
+test("get registered", async ({ page }) => {
+  await page.goto("http://localhost:3000/register");
+
+  const smålagText = await page.locator("text=Smålag").innerText();
+  await expect(smålagText).toBeDefined();
+});
