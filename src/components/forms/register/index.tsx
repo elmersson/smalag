@@ -2,15 +2,15 @@
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { type SignUpFormValues, SignUpSchema } from "./schema";
+import { type RegisterFormValues, RegisterSchema } from "./schema";
 import FormItem from "@/components/global/form-inputfield";
 
-const SignUpForm = () => {
-  const { handleSubmit, control } = useForm<SignUpFormValues>({
-    resolver: zodResolver(SignUpSchema),
+const RegisterForm = () => {
+  const { handleSubmit, control } = useForm<RegisterFormValues>({
+    resolver: zodResolver(RegisterSchema),
   });
 
-  const onSubmit = (data: SignUpFormValues) => {
+  const onSubmit = (data: RegisterFormValues) => {
     console.log(data);
   };
   return (
@@ -49,4 +49,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default RegisterForm;
