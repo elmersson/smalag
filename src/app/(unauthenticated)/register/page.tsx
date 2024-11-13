@@ -1,6 +1,6 @@
-import SignUpForm from "@/components/forms/sign-up";
+import RegisterForm from "@/components/forms/register";
 
-const SignUpPage = () => {
+const RegisterPage = () => {
   return (
     <div className="space-y-4">
       <div className="space-y-1">
@@ -10,9 +10,9 @@ const SignUpPage = () => {
           features.
         </p>
       </div>
-      <SignUpForm />
+      <RegisterForm />
     </div>
   );
 };
 
-export default SignUpPage;
+export default RegisterPage;

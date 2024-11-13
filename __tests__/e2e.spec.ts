@@ -19,3 +19,10 @@ test("get registered", async ({ page }) => {
   const smålagText = await page.locator("text=Smålag").innerText();
   await expect(smålagText).toBeDefined();
 });
+
+test("get login", async ({ page }) => {
+  await page.goto("http://localhost:3000/login");
+
+  const smålagText = await page.locator("text=Smålag").innerText();
+  await expect(smålagText).toBeDefined();
+});
