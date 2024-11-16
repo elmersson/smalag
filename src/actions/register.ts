@@ -1,6 +1,6 @@
 "use server";
 
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { RegisterSchema } from "@/components/forms/register/schema";
 import type { z } from "zod";
 import { getUserByEmail } from "../data/user";
