@@ -26,7 +26,6 @@ const RegisterForm = () => {
         setSuccess(data.success);
       });
     });
-    console.log(data);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -53,11 +52,11 @@ const RegisterForm = () => {
           control: control,
         }}
       />
-      <Button className="w-full" disabled={isPending}>
+      <Button className="w-full" loading={isPending}>
         Create an account
       </Button>
-      {error && <div>{error}</div>}
-      {success && <div>{success}</div>}
+      {error && <p className="text-red-400">{error}</p>}
+      {success && <p className="text-green-400">{success}</p>}
     </form>
   );
 };

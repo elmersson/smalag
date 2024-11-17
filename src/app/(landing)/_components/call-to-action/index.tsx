@@ -21,15 +21,17 @@ const CallToAction = () => {
         projects
       </p>
       <div className="flex md:flex-row flex-col md:justify-center gap-5 md:mt-5 w-full">
-        <Button
-          variant="outline"
-          className="rounded-xl bg-transparent text-base"
-        >
-          Watch Demo
-        </Button>
-        <Link href="/sign-in">
+        <Link href="/login">
+          <Button
+            variant="outline"
+            className="rounded-xl bg-transparent text-base"
+          >
+            Login
+          </Button>
+        </Link>
+        <Link href="/register">
           <Button className="rounded-xl text-base flex gap-2 w-full">
-            <BadgePlus /> Get Started
+            <BadgePlus /> Register
           </Button>
         </Link>
       </div>

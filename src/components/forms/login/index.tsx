@@ -9,7 +9,6 @@ import { login } from "@/actions/login";
 
 const LoginForm = () => {
   const [error, setError] = useState<string | undefined>(undefined);
-  const [success, setSuccess] = useState<string | undefined>(undefined);
   const [isPending, startTransition] = useTransition();
 
   const { handleSubmit, control } = useForm<LoginFormValues>({
@@ -18,7 +17,6 @@ const LoginForm = () => {
 
   const onSubmit = (data: LoginFormValues) => {
     setError("");
-    setSuccess("");
 
     startTransition(() => {
       login(data).then((data) => {
@@ -43,11 +41,10 @@ const LoginForm = () => {
           control: control,
         }}
       />
-      <Button className="w-full" disabled={isPending}>
+      <Button className="w-full" loading={isPending}>
         Login
       </Button>
-      {error && <div>{error}</div>}
-      {success && <div>{success}</div>}
+      {error && <p className="text-red-400">{error}</p>}
     </form>
   );
 };
