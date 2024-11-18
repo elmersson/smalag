@@ -26,3 +26,10 @@ test("get login", async ({ page }) => {
   const smålagText = await page.locator("text=Smålag").innerText();
   await expect(smålagText).toBeDefined();
 });
+
+test("get error", async ({ page }) => {
+  await page.goto("http://localhost:3000/error");
+
+  const smålagText = await page.locator("text=Smålag").innerText();
+  await expect(smålagText).toBeDefined();
+});
