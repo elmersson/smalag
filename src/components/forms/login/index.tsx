@@ -10,6 +10,7 @@ import { OAuthButtons } from "@/components/global/oauth-buttons";
 
 const LoginForm = () => {
   const [error, setError] = useState<string | undefined>(undefined);
+  const [success, setSuccess] = useState<string | undefined>(undefined);
   const [isPending, startTransition] = useTransition();
 
   const { handleSubmit, control } = useForm<LoginFormValues>({
@@ -17,11 +18,13 @@ const LoginForm = () => {
   });
 
   const onSubmit = (data: LoginFormValues) => {
-    setError("");
+    setError(undefined);
+    setSuccess(undefined);
 
     startTransition(() => {
       login(data).then((data) => {
         setError(data?.error);
+        setSuccess(data?.success);
       });
     });
   };
@@ -47,6 +50,7 @@ const LoginForm = () => {
           Login
         </Button>
         {error && <p className="text-red-400">{error}</p>}
+        {success && <p className="text-green-400">{success}</p>}
       </form>
       <OAuthButtons />
     </>
