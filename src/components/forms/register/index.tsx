@@ -6,6 +6,7 @@ import { type RegisterFormValues, RegisterSchema } from "./schema";
 import FormItem from "@/components/global/form-inputfield";
 import { useState, useTransition } from "react";
 import { register } from "@/actions/register";
+import { OAuthButtons } from "@/components/global/oauth-buttons";
 
 const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>(undefined);
@@ -28,36 +29,39 @@ const RegisterForm = () => {
     });
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <FormItem
-        label={"Name"}
-        controlProps={{
-          name: "name",
-          control: control,
-        }}
-      />
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <FormItem
+          label={"Name"}
+          controlProps={{
+            name: "name",
+            control: control,
+          }}
+        />
 
-      <FormItem
-        label={"Email"}
-        controlProps={{
-          name: "email",
-          control: control,
-        }}
-      />
-      <FormItem
-        label={"Password"}
-        type="password"
-        controlProps={{
-          name: "password",
-          control: control,
-        }}
-      />
-      <Button className="w-full" loading={isPending}>
-        Create an account
-      </Button>
-      {error && <p className="text-red-400">{error}</p>}
-      {success && <p className="text-green-400">{success}</p>}
-    </form>
+        <FormItem
+          label={"Email"}
+          controlProps={{
+            name: "email",
+            control: control,
+          }}
+        />
+        <FormItem
+          label={"Password"}
+          type="password"
+          controlProps={{
+            name: "password",
+            control: control,
+          }}
+        />
+        <Button className="w-full" loading={isPending}>
+          Create an account
+        </Button>
+        {error && <p className="text-red-400">{error}</p>}
+        {success && <p className="text-green-400">{success}</p>}
+      </form>
+      <OAuthButtons />
+    </>
   );
 };
 
