@@ -7,6 +7,7 @@ import FormItem from "@/components/global/form-inputfield";
 import { useState, useTransition } from "react";
 import { login } from "@/actions/login";
 import { OAuthButtons } from "@/components/global/oauth-buttons";
+import Link from "next/link";
 
 const LoginForm = () => {
   const [error, setError] = useState<string | undefined>(undefined);
@@ -46,6 +47,7 @@ const LoginForm = () => {
             control: control,
           }}
         />
+
         <Button className="w-full" loading={isPending}>
           Login
         </Button>
@@ -53,6 +55,18 @@ const LoginForm = () => {
         {success && <p className="text-green-400">{success}</p>}
       </form>
       <OAuthButtons />
+      <div className="flex items-center w-full gap-x-2">
+        <Link href="/reset" className="w-full">
+          <Button size="lg" className="w-full" variant="link">
+            Reset password
+          </Button>
+        </Link>
+        <Link href="/register" className="w-full">
+          <Button size="lg" className="w-full" variant="link">
+            Sign up
+          </Button>
+        </Link>
+      </div>
     </>
   );
 };
