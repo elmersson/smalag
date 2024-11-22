@@ -12,6 +12,7 @@ export const LoginSchema = z.object({
       (value) => /^[a-zA-Z0-9_.-]*$/.test(value ?? ""),
       "password should contain only alphabets and numbers",
     ),
+  code: z.optional(z.string()),
 });
 
 export type LoginFormValues = z.infer<typeof LoginSchema>;
