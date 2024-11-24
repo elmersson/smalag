@@ -3,65 +3,113 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type RegisterFormValues, RegisterSchema } from "./schema";
-import FormItem from "@/components/global/form-inputfield";
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import { register } from "@/actions/register";
 import { OAuthButtons } from "@/components/global/oauth-buttons";
+import { toast } from "sonner";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
+import Link from "next/link";
 
 const RegisterForm = () => {
-  const [error, setError] = useState<string | undefined>(undefined);
-  const [success, setSuccess] = useState<string | undefined>(undefined);
   const [isPending, startTransition] = useTransition();
 
-  const { handleSubmit, control } = useForm<RegisterFormValues>({
+  const form = useForm<RegisterFormValues>({
     resolver: zodResolver(RegisterSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
   });
 
   const onSubmit = (data: RegisterFormValues) => {
-    setError("");
-    setSuccess("");
-
     startTransition(() => {
       register(data).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
+        if (data.success) {
+          toast.success(data.success);
+        }
+
+        if (data.error) {
+          toast.error(data.error);
+        }
       });
     });
   };
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <FormItem
-          label={"Name"}
-          controlProps={{
-            name: "name",
-            control: control,
-          }}
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input placeholder="eg. Jane Doe" type="text" {...field} />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
         />
 
-        <FormItem
-          label={"Email"}
-          controlProps={{
-            name: "email",
-            control: control,
-          }}
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem className="grid gap-2">
+              <FormLabel htmlFor="email">Email</FormLabel>
+              <FormControl>
+                <Input
+                  id="email"
+                  placeholder="eg. janedoe@mail.com"
+                  type="email"
+                  autoComplete="email"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        <FormItem
-          label={"Password"}
-          type="password"
-          controlProps={{
-            name: "password",
-            control: control,
-          }}
+
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <PasswordInput id="password" {...field} />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
         />
         <Button className="w-full" loading={isPending}>
           Create an account
         </Button>
-        {error && <p className="text-red-400">{error}</p>}
-        {success && <p className="text-green-400">{success}</p>}
       </form>
       <OAuthButtons />
-    </>
+      <p className="text-themeTextGray leading-tight">
+        If you have an account already go to{" "}
+        <Link href="/login">
+          <Button size="lg" variant="link" className="p-0">
+            login
+          </Button>
+        </Link>
+      </p>
+    </Form>
   );
 };
 
