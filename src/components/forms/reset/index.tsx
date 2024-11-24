@@ -3,48 +3,71 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type ResetFormValues, ResetSchema } from "./schema";
-import FormItem from "@/components/global/form-inputfield";
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import { reset } from "@/actions/reset";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
 const ResetForm = () => {
-  const [success, setSuccess] = useState<string | undefined>(undefined);
-  const [error, setError] = useState<string | undefined>(undefined);
   const [isPending, startTransition] = useTransition();
 
-  const { handleSubmit, control } = useForm<ResetFormValues>({
+  const form = useForm<ResetFormValues>({
     resolver: zodResolver(ResetSchema),
+    defaultValues: { email: "" },
   });
 
-  const onSubmit = (data: ResetFormValues) => {
-    setSuccess(undefined);
-    setError(undefined);
+  const { setError } = form;
 
+  const onSubmit = (data: ResetFormValues) => {
     startTransition(() => {
       reset(data).then((data) => {
-        setSuccess(data.success);
-        setError(data?.error);
+        if (data.success) {
+          toast.success(data.success);
+        }
+
+        if (data.error) {
+          setError("email", { message: data.error });
+          toast.error(data.error);
+        }
       });
     });
   };
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <FormItem
-          label={"Email"}
-          controlProps={{
-            name: "email",
-            control: control,
-          }}
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem className="grid gap-2">
+              <FormLabel htmlFor="email">Email</FormLabel>
+              <FormControl>
+                <Input
+                  id="email"
+                  placeholder="eg. janedoe@mail.com"
+                  type="email"
+                  autoComplete="email"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
 
         <Button className="w-full" loading={isPending}>
           Send reset email
         </Button>
-        {success && <p className="text-green-400">{success}</p>}
-        {error && <p className="text-red-400">{error}</p>}
       </form>
-    </>
+    </Form>
   );
 };
 
