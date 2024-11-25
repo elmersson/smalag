@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/components/global/sidebar/app-sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -13,13 +13,8 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import type React from "react";
 
-export default function AuthenticatedLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function Page() {
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -43,7 +38,14 @@ export default function AuthenticatedLayout({
             </Breadcrumb>
           </div>
         </header>
-        {children}
+        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+            <div className="aspect-video rounded-xl bg-muted/50" />
+            <div className="aspect-video rounded-xl bg-muted/50" />
+            <div className="aspect-video rounded-xl bg-muted/50" />
+          </div>
+          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );
