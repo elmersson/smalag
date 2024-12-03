@@ -19,20 +19,15 @@ import {
 } from "@/components/ui/sidebar";
 
 import type { ExtendedUser } from "../../../../next-auth";
-import { createSpace } from "@/actions/spaces";
+
+import { useRouter } from "next/navigation";
 
 export function NavSpaces({ user }: { user: Pick<ExtendedUser, "id"> }) {
   const { isMobile } = useSidebar();
+  const router = useRouter();
 
   const handleCreateSpace = async () => {
-    if (user.id) {
-      await createSpace(user.id, {
-        name: "New Space",
-        description: "Description",
-      });
-    } else {
-      console.error("User ID is undefined");
-    }
+    router.push("/spaces");
   };
 
   return (

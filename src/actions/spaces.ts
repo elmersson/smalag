@@ -6,8 +6,6 @@ export const createSpace = async (
   userId: string,
   spaceData: { name: string; description?: string },
 ) => {
-  console.log("createSpace");
-
   const space = await db.space.create({
     data: {
       name: spaceData.name,
@@ -21,5 +19,5 @@ export const createSpace = async (
     },
   });
 
-  return { success: "Space created!", space };
+  return { success: `Space ${space.name} created!`, space };
 };
