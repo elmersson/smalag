@@ -21,3 +21,16 @@ export const createSpace = async (
 
   return { success: `Space ${space.name} created!`, space };
 };
+
+export const getUserSpaces = async (userId: string) => {
+  const userSpaces = await db.userSpace.findMany({
+    where: {
+      userId: userId,
+    },
+    include: {
+      space: true,
+    },
+  });
+
+  return userSpaces.map((userSpace) => userSpace.space);
+};

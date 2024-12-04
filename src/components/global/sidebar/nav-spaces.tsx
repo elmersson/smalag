@@ -21,10 +21,22 @@ import {
 import type { ExtendedUser } from "../../../../next-auth";
 
 import { useRouter } from "next/navigation";
+import { useUserSpaces } from "@/queries/spaces";
 
 export function NavSpaces({ user }: { user: Pick<ExtendedUser, "id"> }) {
   const { isMobile } = useSidebar();
   const router = useRouter();
+
+  const { data: spaces = [], isLoading, error } = useUserSpaces(user?.id || "");
+
+  if (isLoading) {
+    return <div>Loading spaces...</div>;
+  }
+
+  if (error) {
+    console.error("Error fetching spaces:", error);
+    return <div>Failed to load spaces</div>;
+  }
 
   const handleCreateSpace = async () => {
     router.push("/spaces");
@@ -47,8 +59,8 @@ export function NavSpaces({ user }: { user: Pick<ExtendedUser, "id"> }) {
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user.id}</span>
-                <span className="truncate text-xs">{user.id}</span>
+                <span className="truncate font-semibold">name</span>
+                <span className="truncate text-xs">id</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -60,19 +72,26 @@ export function NavSpaces({ user }: { user: Pick<ExtendedUser, "id"> }) {
             sideOffset={4}
           >
             <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage
-                    src={user.id || undefined}
-                    alt={user.id || "User"}
-                  />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{user.id}</span>
-                  <span className="truncate text-xs">{user.id}</span>
+              {spaces.map((space) => (
+                <div
+                  key={space.id}
+                  className="flex items-center gap-2 px-1 py-1.5 text-left text-sm"
+                >
+                  <Avatar className="h-8 w-8 rounded-lg">
+                    <AvatarImage
+                      src={user.id || undefined}
+                      alt={user.id || "User"}
+                    />
+                    <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                  </Avatar>
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate font-semibold">{space.name}</span>
+                    <span className="truncate text-xs">
+                      {space.description}
+                    </span>
+                  </div>
                 </div>
-              </div>
+              ))}
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
 
