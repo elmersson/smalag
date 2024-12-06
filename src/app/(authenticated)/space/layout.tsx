@@ -1,31 +1,50 @@
+import { AppSidebar } from "@/components/global/sidebar/app-sidebar";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import type React from "react";
 
-import BackdropGradient from "@/components/global/backdrop-gradient";
-import GlassCard from "@/components/global/glass-card";
-import Link from "next/link";
-
-type Props = {
+export default function AuthenticatedLayout({
+  children,
+}: Readonly<{
   children: React.ReactNode;
-};
-
-const SpacesLayout = async ({ children }: Props) => {
+}>) {
   return (
-    <div className="container h-screen flex justify-center items-center">
-      <div className="flex flex-col w-full items-center py-24">
-        <Link href="/">
-          <h2 className="text-4xl font-bold text-themeTextWhite">Smålag.</h2>
-        </Link>
-        <BackdropGradient
-          className="w-4/12 h-2/6 opacity-40"
-          container="flex flex-col items-center"
-        >
-          <GlassCard className="xs:w-full md:w-7/12 lg:w-5/12 xl:w-4/12 p-7 mt-16">
-            {children}
-          </GlassCard>
-        </BackdropGradient>
-      </div>
-    </div>
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <header className="flex h-16 shrink-0 items-center gap-2">
+          <div className="flex items-center gap-2 px-4">
+            <SidebarTrigger className="-ml-1" />
+            <Separator orientation="vertical" className="mr-2 h-4" />
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem className="hidden md:block">
+                  <BreadcrumbLink href="#">
+                    Building Your Application
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="hidden md:block" />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+        </header>
+        {children}
+      </SidebarInset>
+    </SidebarProvider>
   );
-};
-
-export default SpacesLayout;
+}

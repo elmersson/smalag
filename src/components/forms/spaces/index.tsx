@@ -17,8 +17,10 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 
 const CreateSpaceForm = () => {
+  const queryClient = useQueryClient();
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
@@ -36,7 +38,9 @@ const CreateSpaceForm = () => {
       createSpace(id, data).then((data) => {
         if (data.success) {
           toast.success(data.success);
-          router.push("/home");
+          router.push(`/space/${data.space.id}`);
+
+          queryClient.invalidateQueries({ queryKey: ["userSpaces", id] });
         }
       });
     });

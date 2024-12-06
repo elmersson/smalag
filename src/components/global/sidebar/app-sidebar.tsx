@@ -136,17 +136,17 @@ const data = {
   ],
   projects: [
     {
-      name: "Design Engineering",
+      name: "Home",
       url: "#",
       icon: Frame,
     },
     {
-      name: "Sales & Marketing",
+      name: "Tickets",
       url: "#",
       icon: PieChart,
     },
     {
-      name: "Travel",
+      name: "Chats",
       url: "#",
       icon: Map,
     },
@@ -166,8 +166,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
+        <NavMain items={data.navMain} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
