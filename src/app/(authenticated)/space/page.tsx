@@ -1,19 +1,30 @@
-import CreateSpaceForm from "@/components/forms/spaces";
+"use client";
 
-const SpacesPage = () => {
+import { useUserSpaces } from "@/queries/spaces";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect, useMemo } from "react";
+
+export default function Home() {
+  const router = useRouter();
+  const { data: session } = useSession();
+  const { isLoading, data: spaces } = useUserSpaces(session?.user?.id || "");
+
+  const spaceId = useMemo(() => spaces?.[0]?.id, [spaces]);
+
+  useEffect(() => {
+    if (isLoading) return;
+
+    if (spaceId) {
+      router.push(`space/${spaceId}`);
+    } else if (!open) {
+      router.push("../create-space");
+    }
+  }, [spaceId, isLoading, router]);
+
   return (
-    <div className="space-y-4">
-      <div className="space-y-1">
-        <h5 className="font-bold text-base text-themeTextWhite">
-          Create a space
-        </h5>
-        <p className="text-themeTextGray leading-tight">
-          Create a space to start collaborating with your team.
-        </p>
-      </div>
-      <CreateSpaceForm />
+    <div>
+      <h1>Space</h1>
     </div>
   );
-};
-
-export default SpacesPage;
+}
