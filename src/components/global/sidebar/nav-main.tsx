@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight, type LucideIcon } from "lucide-react";
+import { ChevronRight, Plus, type LucideIcon } from "lucide-react";
 
 import {
   Collapsible,
@@ -18,7 +18,9 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
-
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { useSpaceId } from "@/hooks/use-space-id";
 export function NavMain({
   items,
 }: {
@@ -33,9 +35,23 @@ export function NavMain({
     }[];
   }[];
 }) {
+  const router = useRouter();
+  const spaceId = useSpaceId();
+
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <div className="flex items-center justify-between hover:opacity-100">
+        <SidebarGroupLabel>Platform</SidebarGroupLabel>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => {
+            router.push(`/create/channel/${spaceId}`);
+          }}
+        >
+          <Plus className="text-sidebar-foreground/70" />
+        </Button>
+      </div>
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible key={item.title} asChild defaultOpen={item.isActive}>

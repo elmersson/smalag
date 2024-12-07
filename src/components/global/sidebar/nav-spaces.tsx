@@ -21,7 +21,7 @@ import type { ExtendedUser } from "../../../../next-auth";
 
 import { useRouter } from "next/navigation";
 import { useUserSpaces } from "@/queries/spaces";
-import { useSpaceId } from "@/hooks/useSpaceId";
+import { useSpaceId } from "@/hooks/use-space-id";
 
 export function NavSpaces({ user }: { user: Pick<ExtendedUser, "id"> }) {
   const { isMobile } = useSidebar();
@@ -40,7 +40,7 @@ export function NavSpaces({ user }: { user: Pick<ExtendedUser, "id"> }) {
   }
 
   const handleCreateSpace = async () => {
-    router.push("/create-space");
+    router.push("/create/space");
   };
 
   const currentSpace = spaces.find((space) => space.id === spaceId);

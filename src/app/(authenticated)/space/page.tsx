@@ -18,7 +18,7 @@ export default function Home() {
     if (spaceId) {
       router.push(`space/${spaceId}`);
     } else if (!open) {
-      router.push("../create-space");
+      router.push("/create/space");
     }
   }, [spaceId, isLoading, router]);
 

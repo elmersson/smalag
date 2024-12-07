@@ -8,7 +8,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const SpacesLayout = async ({ children }: Props) => {
+const CreateLayout = async ({ children }: Props) => {
   return (
     <div className="container h-screen flex justify-center items-center">
       <div className="flex flex-col w-full items-center py-24">
@@ -28,4 +28,4 @@ const SpacesLayout = async ({ children }: Props) => {
   );
 };
 
-export default SpacesLayout;
+export default CreateLayout;
