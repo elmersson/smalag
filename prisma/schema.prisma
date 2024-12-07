@@ -72,9 +72,10 @@ model Channel {
 }
 
 model UserChannel {
-  id        String @id @default(uuid())
+  id        String   @id @default(uuid())
   userId    String
   channelId String
+  role      UserRole @default(USER)
 
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   channel Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
