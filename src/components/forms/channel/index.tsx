@@ -18,8 +18,10 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { useRouter } from "next/navigation";
 import { useSpaceId } from "@/hooks/use-space-id";
 import { createChannel } from "@/actions/channels";
+import { useQueryClient } from "@tanstack/react-query";
 
 const CreateChannelForm = () => {
+  const queryClient = useQueryClient();
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const spaceId = useSpaceId();
@@ -41,6 +43,8 @@ const CreateChannelForm = () => {
         if (data.success) {
           toast.success(data.success);
           router.push(`/space/${spaceId}/channel/${data.channel.id}`);
+
+          queryClient.invalidateQueries({ queryKey: ["userSpaces", id] });
         }
       });
     });

@@ -1,15 +1,15 @@
-import GlassSheet from "@/components/global/glass-sheet";
+// import GlassSheet from "@/components/global/glass-sheet";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { MenuIcon } from "lucide-react";
+// import { MenuIcon } from "lucide-react";
 import { Logout } from "@/icons";
-import Menu from "./menu";
+// import Menu from "./menu";
 
 const LandingPageNavbar = () => {
   return (
     <div className="w-full flex justify-between sticky top-0 items-center py-5 z-50">
       <p className="font-bold text-2xl">Smålag.</p>
-      <Menu orientation="desktop" />
+      {/* <Menu orientation="desktop" /> */}
       <div className="flex gap-2">
         <Link href="/register">
           <Button
@@ -20,7 +20,7 @@ const LandingPageNavbar = () => {
             Login
           </Button>
         </Link>
-        <GlassSheet
+        {/* <GlassSheet
           triggerClass="lg:hidden"
           trigger={
             <Button variant="ghost" className="hover:bg-transparent">
@@ -29,7 +29,7 @@ const LandingPageNavbar = () => {
           }
         >
           <Menu orientation="mobile" />
-        </GlassSheet>
+        </GlassSheet> */}
       </div>
     </div>
   );
