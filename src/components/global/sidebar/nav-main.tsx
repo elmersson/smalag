@@ -1,47 +1,36 @@
 "use client";
 
-import { ChevronRight, Plus, type LucideIcon } from "lucide-react";
+import { Plus } from "lucide-react";
 
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+import { Collapsible } from "@/components/ui/collapsible";
 import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useSpaceId } from "@/hooks/use-space-id";
-export function NavMain({
-  items,
-}: {
-  items: {
-    title: string;
-    url: string;
-    icon: LucideIcon;
-    isActive?: boolean;
-    items?: {
-      title: string;
-      url: string;
-    }[];
-  }[];
-}) {
+import { useUserChannels } from "@/queries/channels";
+import { useCurrentUser } from "@/hooks/use-current-user";
+export function NavMain() {
   const router = useRouter();
   const spaceId = useSpaceId();
+  const { id: userId } = useCurrentUser();
+
+  const { data: channels, error } = useUserChannels(
+    userId ?? "",
+    spaceId ?? "",
+  );
+
+  console.log(channels, error, userId, spaceId);
 
   return (
     <SidebarGroup>
       <div className="flex items-center justify-between hover:opacity-100">
-        <SidebarGroupLabel>Platform</SidebarGroupLabel>
+        <SidebarGroupLabel>Channels</SidebarGroupLabel>
         <Button
           variant="ghost"
           size="icon"
@@ -53,16 +42,16 @@ export function NavMain({
         </Button>
       </div>
       <SidebarMenu>
-        {items.map((item) => (
-          <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
+        {channels?.map((item) => (
+          <Collapsible key={item.id} asChild defaultOpen={false}>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip={item.title}>
-                <a href={item.url}>
-                  <item.icon />
-                  <span>{item.title}</span>
-                </a>
+              <SidebarMenuButton asChild tooltip={item.name}>
+                {/* <a href={item.url}> */}
+                {/* <item.icon /> */}
+                <span>{item.name}</span>
+                {/* </a> */}
               </SidebarMenuButton>
-              {item.items?.length ? (
+              {/* {item.items?.length ? (
                 <>
                   <CollapsibleTrigger asChild>
                     <SidebarMenuAction className="data-[state=open]:rotate-90">
@@ -84,7 +73,7 @@ export function NavMain({
                     </SidebarMenuSub>
                   </CollapsibleContent>
                 </>
-              ) : null}
+              ) : null} */}
             </SidebarMenuItem>
           </Collapsible>
         ))}
