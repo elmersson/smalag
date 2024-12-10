@@ -169,8 +169,8 @@ model Board {
   type        BoardType
   title       String
   description String?
-  startDate   DateTime
-  endDate     DateTime
+  startDate   DateTime?
+  endDate     DateTime?
   columns     BoardColumn[]
   tickets     BoardTicket[]
   channels    Channel[]

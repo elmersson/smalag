@@ -6,6 +6,9 @@ export const createSpace = async (
   userId: string,
   spaceData: { name: string; description?: string },
 ) => {
+  console.log("Creating space for userId:", userId);
+  console.log("Space data:", spaceData);
+
   const space = await db.space.create({
     data: {
       name: spaceData.name,

@@ -36,6 +36,7 @@ const CreateSpaceForm = () => {
   const onSubmit = (data: CreateSpaceFormValues) => {
     startTransition(() => {
       createSpace(id, data).then((data) => {
+        console.log(data);
         if (data.success) {
           toast.success(data.success);
           router.push(`/space/${data.space.id}`);
