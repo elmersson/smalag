@@ -20,12 +20,7 @@ export function NavMain() {
   const spaceId = useSpaceId();
   const { id: userId } = useCurrentUser();
 
-  const { data: channels, error } = useUserChannels(
-    userId ?? "",
-    spaceId ?? "",
-  );
-
-  console.log(channels, error, userId, spaceId);
+  const { data: channels } = useUserChannels(userId ?? "", spaceId ?? "");
 
   return (
     <SidebarGroup>

@@ -35,7 +35,6 @@ export function NavSpaces({ user }: { user: Pick<ExtendedUser, "id"> }) {
   }
 
   if (error) {
-    console.error("Error fetching spaces:", error);
     return <div>Failed to load spaces</div>;
   }
 
