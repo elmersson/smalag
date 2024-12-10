@@ -29,8 +29,7 @@ export async function GET(request: Request) {
     const channels = userChannels.map((userChannel) => userChannel.channel);
 
     return NextResponse.json(channels);
-  } catch (error) {
-    console.error("Error fetching user channels:", error);
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch channels for the user in the specified space" },
       { status: 500 },
