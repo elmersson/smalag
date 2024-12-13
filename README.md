@@ -1,4 +1,4 @@
-# :computer: Smalag
+# :computer: Smalag - Web
 
 ## Description
 
