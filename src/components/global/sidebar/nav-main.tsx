@@ -40,7 +40,15 @@ export function NavMain() {
         {channels?.map((item) => (
           <Collapsible key={item.id} asChild defaultOpen={false}>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip={item.name}>
+              <SidebarMenuButton
+                asChild
+                tooltip={item.name}
+                onClick={() => {
+                  router.push(
+                    `/space/${spaceId}/channel/${item.id}/board/${item.id}`,
+                  );
+                }}
+              >
                 {/* <a href={item.url}> */}
                 {/* <item.icon /> */}
                 <span>{item.name}</span>

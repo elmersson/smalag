@@ -1,11 +1,9 @@
-import { useBoardId } from "@/hooks/use-board-id";
+import { Board } from "@/components/global/board/board";
 
-export default function Board() {
-  const boardId = useBoardId();
-
+export default function BoardPage() {
   return (
     <div>
-      <h1>Board : {boardId}</h1>
+      <Board />
     </div>
   );
 }
