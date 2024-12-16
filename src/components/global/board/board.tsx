@@ -6,6 +6,8 @@ import {
   type OnDragEndResponder,
 } from "@hello-pangea/dnd";
 import Ticket from "./ticket";
+import { Button } from "@/components/ui/button";
+import { createTicket } from "@/actions/ticket";
 
 export const mockBoardColumns = [
   {
@@ -67,9 +69,26 @@ export const mockBoardTickets = [
   },
 ];
 
-export const Board = () => {
+interface BoardProps {
+  boardId?: string;
+  userId?: string;
+}
+
+export const Board = ({ boardId, userId }: BoardProps) => {
+  if (!userId || !boardId) return null;
+
   const onDragEnd: OnDragEndResponder = (result) => {
     console.log(result);
+  };
+
+  const handleCreateTicket = async () => {
+    const newTask = await createTicket(boardId, {
+      title: "New Task",
+      description: "This is a brand new task",
+      reportedBy: userId,
+      assignedTo: userId,
+    });
+    console.log("New Task Created:", newTask);
   };
 
   return (
@@ -98,6 +117,12 @@ export const Board = () => {
             )}
           </Droppable>
         ))}
+        <Button
+          onClick={handleCreateTicket}
+          className="mb-4 p-2 bg-blue-500 text-white rounded"
+        >
+          Create Task
+        </Button>
       </div>
     </DragDropContext>
   );
