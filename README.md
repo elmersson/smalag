@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a prototype of a software created by developers, for developers, with a focus on providing a comprehensive project management tool using AI.
+This is a prototype of software created by developers, for developers, with a focus on providing a comprehensive project management tool using AI.
 
 ## Tech-stack
 
