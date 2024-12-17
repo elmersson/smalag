@@ -8,6 +8,7 @@ import {
 import Ticket from "./ticket";
 import { Button } from "@/components/ui/button";
 import { createTicket } from "@/actions/ticket";
+import type { BoardTicket } from "@prisma/client";
 
 export const mockBoardColumns = [
   {
@@ -30,7 +31,7 @@ export const mockBoardColumns = [
   },
 ];
 
-export const mockBoardTickets = [
+export const mockBoardTickets: BoardTicket[] = [
   {
     id: "tic_1",
     title: "Fix login bug",
