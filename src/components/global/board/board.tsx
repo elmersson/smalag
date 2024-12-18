@@ -9,6 +9,7 @@ import Ticket from "./ticket";
 import { Button } from "@/components/ui/button";
 import { createTicket } from "@/actions/ticket";
 import type { BoardTicket } from "@prisma/client";
+import { PlusIcon } from "lucide-react";
 
 export const mockBoardColumns = [
   {
@@ -104,12 +105,19 @@ export const Board = ({ boardId, userId }: BoardProps) => {
           >
             {(provided) => (
               <div
-                className="grow basis-full bg-neutral-800 p-2"
+                className="grow basis-full bg-neutral-800 p-2 max-w-md rounded-md"
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                <div className="text-subtlest font-semibold text-sm mb-5">
-                  {col.label}
+                <div className="flex justify-between items-center p-2">
+                  <div className=" font-semibold text-sm">{col.label}</div>
+                  <Button
+                    onClick={() => handleCreateTicket()}
+                    className="p-2 text-white rounded flex items-center"
+                    variant="ghost"
+                  >
+                    <PlusIcon className="w-4 h-4" />
+                  </Button>
                 </div>
                 {mockBoardTickets.map((ticket) => (
                   <Ticket key={ticket.id} {...ticket} />
