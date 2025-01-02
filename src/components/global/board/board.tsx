@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { createTicket } from "@/actions/ticket";
 import type { BoardTicket } from "@prisma/client";
 import { PlusIcon } from "lucide-react";
+import Link from "next/link";
 
 export const mockBoardColumns = [
   {
@@ -74,10 +75,12 @@ export const mockBoardTickets: BoardTicket[] = [
 interface BoardProps {
   boardId?: string;
   userId?: string;
+  spaceId?: string;
+  channelId?: string;
 }
 
-export const Board = ({ boardId, userId }: BoardProps) => {
-  if (!userId || !boardId) return null;
+export const Board = ({ boardId, userId, spaceId, channelId }: BoardProps) => {
+  if (!userId || !boardId || !spaceId || !channelId) return null;
 
   const onDragEnd: OnDragEndResponder = (result) => {
     console.log(result);
@@ -126,12 +129,16 @@ export const Board = ({ boardId, userId }: BoardProps) => {
             )}
           </Droppable>
         ))}
-        <Button
-          onClick={handleCreateTicket}
-          className="mb-4 p-2 bg-blue-500 text-white rounded"
+        <Link
+          href={`/space/${spaceId}/channel/${channelId}/board/${boardId}/create-ticket`}
         >
-          Create Task
-        </Button>
+          <Button
+            // onClick={handleCreateTicket}
+            className="mb-4 p-2 bg-blue-500 text-white rounded"
+          >
+            Create Task
+          </Button>
+        </Link>
       </div>
     </DragDropContext>
   );
