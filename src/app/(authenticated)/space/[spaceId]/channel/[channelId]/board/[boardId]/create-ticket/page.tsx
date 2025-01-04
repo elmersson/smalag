@@ -1,3 +1,5 @@
+import CreateTicketForm from "@/components/forms/create-ticket";
+
 export default function CreateTicketModalPage() {
-  return <div>Create Ticket Page</div>;
+  return <CreateTicketForm />;
 }
