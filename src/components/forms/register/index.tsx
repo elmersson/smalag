@@ -46,6 +46,13 @@ const RegisterForm = () => {
   };
   return (
     <Form {...form}>
+      <OAuthButtons />
+
+      <div className="flex flex-row gap-2 items-center ">
+        <span className="flex-grow h-[1px] bg-themeTextGray/20" />
+        <p className="text-themeTextGray text-sm">or continue using email</p>
+        <span className="flex-grow h-[1px] bg-themeTextGray/20" />
+      </div>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
@@ -100,11 +107,10 @@ const RegisterForm = () => {
           Create an account
         </Button>
       </form>
-      <OAuthButtons />
-      <p className="text-themeTextGray leading-tight">
+      <p className="text-themeTextGray leading-tight text-sm">
         If you have an account already go to{" "}
         <Link href="/login">
-          <Button size="lg" variant="link" className="p-0">
+          <Button size="lg" variant="link" className="p-0 font-bold">
             login
           </Button>
         </Link>

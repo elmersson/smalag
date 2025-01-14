@@ -25,9 +25,9 @@ const LoginForm = () => {
   const [isPending, startTransition] = useTransition();
 
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl");
+  const callbackUrl = searchParams?.get("callbackUrl");
   const urlError =
-    searchParams.get("error") === "OAuthAccountNotLinked"
+    searchParams?.get("error") === "OAuthAccountNotLinked"
       ? "Email already in use with different Provider!"
       : "";
 
@@ -64,6 +64,14 @@ const LoginForm = () => {
   };
   return (
     <Form {...form}>
+      <OAuthButtons />
+
+      <div className="flex flex-row gap-2 items-center ">
+        <span className="flex-grow h-[1px] bg-themeTextGray/20" />
+        <p className="text-themeTextGray text-sm">or continue using email</p>
+        <span className="flex-grow h-[1px] bg-themeTextGray/20" />
+      </div>
+
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         {showTwoFactor ? (
           <FormField
@@ -133,12 +141,11 @@ const LoginForm = () => {
         </Button>
         {urlError && <p className="text-red-400">{urlError}</p>}
       </form>
-      <OAuthButtons />
 
-      <p className="text-themeTextGray leading-tight">
+      <p className="text-themeTextGray leading-tight text-sm py-0">
         If you dont have an account already go to{" "}
         <Link href="/register">
-          <Button size="lg" variant="link" className="p-0">
+          <Button size="lg" variant="link" className="p-0 font-bold">
             register
           </Button>
         </Link>
