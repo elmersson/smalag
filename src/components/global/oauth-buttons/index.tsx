@@ -13,7 +13,7 @@ export const OAuthButtons = () => {
   };
 
   return (
-    <div className="flex items-center w-full gap-x-2">
+    <div className="flex items-center w-full gap-x-2 py-2">
       <Button size="lg" className="w-full" onClick={() => onClick("google")}>
         <Google /> Google
       </Button>
