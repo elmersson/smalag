@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/sidebar";
 
 import type { ExtendedUser } from "../../../../next-auth";
+import Link from "next/link";
 
 export function NavUser({
   user,
@@ -74,8 +75,10 @@ export function NavUser({
             <DropdownMenuSeparator />
 
             <DropdownMenuItem>
-              <LogOut />
-              Log out
+              <Link href="/" className="flex flex-row items-center gap-2">
+                <LogOut />
+                Log out
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
