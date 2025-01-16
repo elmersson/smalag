@@ -57,7 +57,7 @@ export const FeatureSection = () => {
             <CardDescription className="text-[#B4B0AE]">
               Work for me
             </CardDescription>
-            <Link href="#" className="w-full mt-3">
+            <Link href="/backlog" className="w-full mt-3">
               <Button
                 variant="default"
                 className="bg-[#333337] w-full rounded-2xl text-white hover:text-[#333337]"
