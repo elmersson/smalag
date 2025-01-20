@@ -41,11 +41,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const data: Backlog[] = [
+const backupData: Backlog[] = [
   {
     id: "m5gr84i9",
     description: "Fetch board data",
-    status: "pending",
+    status: "todo",
     title: "Get board",
   },
   {
@@ -63,22 +63,22 @@ const data: Backlog[] = [
   {
     id: "5kma53ae",
     description: "AI helper",
-    status: "pending",
+    status: "todo",
     title: "AI helper",
   },
   {
     id: "bhqecj4p",
     description: "Jira integration",
-    status: "failed",
+    status: "todo",
     title: "Jira integration",
   },
 ];
 
 export type Backlog = {
   id: string;
-  description: string;
-  status: "pending" | "in-progress" | "done" | "failed";
   title: string;
+  description?: string;
+  status: string;
 };
 
 export const columns: ColumnDef<Backlog>[] = [
@@ -169,7 +169,7 @@ export const columns: ColumnDef<Backlog>[] = [
   },
 ];
 
-export function BacklogTable() {
+export function BacklogTable({ data }: { data?: Backlog[] }) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -179,7 +179,7 @@ export function BacklogTable() {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
-    data,
+    data: data || backupData,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
