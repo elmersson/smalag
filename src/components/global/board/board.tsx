@@ -7,7 +7,6 @@ import {
 } from "@hello-pangea/dnd";
 import Ticket from "./ticket";
 import { Button } from "@/components/ui/button";
-import { createTicket } from "@/actions/ticket";
 import type { BoardTicket } from "@prisma/client";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
@@ -86,16 +85,6 @@ export const Board = ({ boardId, userId, spaceId, channelId }: BoardProps) => {
     console.log(result);
   };
 
-  const handleCreateTicket = async () => {
-    const newTask = await createTicket(boardId, {
-      title: "New Task",
-      description: "This is a brand new task",
-      reportedBy: userId,
-      assignedTo: userId,
-    });
-    console.log("New Task Created:", newTask);
-  };
-
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="flex flex-col sm:flex-row gap-3">
@@ -114,13 +103,16 @@ export const Board = ({ boardId, userId, spaceId, channelId }: BoardProps) => {
               >
                 <div className="flex justify-between items-center p-2">
                   <div className=" font-semibold text-sm">{col.label}</div>
-                  <Button
-                    onClick={() => handleCreateTicket()}
-                    className="p-2 text-white rounded flex items-center"
-                    variant="ghost"
+                  <Link
+                    href={`/space/${spaceId}/channel/${channelId}/board/${boardId}/create-ticket`}
                   >
-                    <PlusIcon className="w-4 h-4" />
-                  </Button>
+                    <Button
+                      className="p-2 text-white rounded flex items-center"
+                      variant="ghost"
+                    >
+                      <PlusIcon className="w-4 h-4" />
+                    </Button>
+                  </Link>
                 </div>
                 {mockBoardTickets.map((ticket) => (
                   <Ticket key={ticket.id} {...ticket} />
@@ -132,10 +124,7 @@ export const Board = ({ boardId, userId, spaceId, channelId }: BoardProps) => {
         <Link
           href={`/space/${spaceId}/channel/${channelId}/board/${boardId}/create-ticket`}
         >
-          <Button
-            // onClick={handleCreateTicket}
-            className="mb-4 p-2 bg-blue-500 text-white rounded"
-          >
+          <Button className="mb-4 p-2 bg-blue-500 text-white rounded">
             Create Task
           </Button>
         </Link>
