@@ -1,12 +1,20 @@
-import { Button } from "@/components/ui/button";
+"use client";
 
-export default async function Home() {
+import { Button } from "@/components/ui/button";
+import { useChannelId } from "@/hooks/use-channel-id";
+import { useSpaceId } from "@/hooks/use-space-id";
+import Link from "next/link";
+
+export default function ChannelPage() {
+  const spaceId = useSpaceId();
+  const channelId = useChannelId();
+
   return (
     <div>
       <h1>Channel</h1>
-      <form>
-        <Button type="submit">Sign out</Button>
-      </form>
+      <Link href={`/create/board/${spaceId}/${channelId}`}>
+        <Button type="submit">Create Board</Button>
+      </Link>
     </div>
   );
 }
