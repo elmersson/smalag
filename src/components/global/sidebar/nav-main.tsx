@@ -44,9 +44,7 @@ export function NavMain() {
                 asChild
                 tooltip={item.name}
                 onClick={() => {
-                  router.push(
-                    `/space/${spaceId}/channel/${item.id}/board/${item.id}`,
-                  );
+                  router.push(`/space/${spaceId}/channel/${item.id}`);
                 }}
               >
                 {/* <a href={item.url}> */}
